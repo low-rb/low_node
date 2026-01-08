@@ -4,7 +4,7 @@ class UserNode < LowNode
   observe 'users/:id'
 
   def initialize(event)
-    @user = UserRepository.find(event[:id])
+    @user = UserData.find(event[:id])
   end
 
   def render
