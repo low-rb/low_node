@@ -11,9 +11,6 @@ class LowNode
   include EventHandler
   include LowType
 
-  def initialize(event:)
-  end
-
   def self.inherited(child)
     child.include LowType
   end
