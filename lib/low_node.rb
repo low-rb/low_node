@@ -11,6 +11,12 @@ class LowNode
   include EventHandler
   include LowType
 
+  attr_reader :event
+
+  def initialize(event:)
+    @event = event
+  end
+
   def self.inherited(child)
     child.include LowType
   end
