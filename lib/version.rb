@@ -1,5 +1,5 @@
 # frozen_string_literal: true
 
 module Low
-  NODE_VERSION = '0.1.1'
+  NODE_VERSION = '0.1.2'
 end

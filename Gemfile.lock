@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    low_node (0.1.1)
+    low_node (0.1.2)
       low_event
       low_type (~> 1.0)
       observers
