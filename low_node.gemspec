@@ -26,6 +26,7 @@ Gem::Specification.new do |spec|
 
   # Uncomment to register a new dependency of your gem
   spec.add_dependency 'low_event'
+  spec.add_dependency 'low_loop'
   spec.add_dependency 'low_type', '~> 1.0'
   spec.add_dependency 'observers'
 

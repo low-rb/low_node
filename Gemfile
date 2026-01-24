@@ -6,6 +6,8 @@ source 'https://rubygems.org'
 gemspec
 
 group :development do
+  gem 'low_loop', path: '../low_loop'
+
   gem 'pry'
   gem 'pry-nav'
   gem 'rack'
