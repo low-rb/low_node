@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
 module Low
-  NODE_VERSION = '0.1.2'
+  module Node
+    VERSION = '0.1.2'
+  end
 end
