@@ -15,6 +15,7 @@ PATH
   specs:
     low_node (0.1.2)
       low_event
+      low_loop
       low_type (~> 1.0)
       observers
 
