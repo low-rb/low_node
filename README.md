@@ -43,3 +43,27 @@ def render
   </html>
 end
 ```
+
+### Conditionals
+
+```ruby
+# Block.
+<{ if: @user.happy? }>
+  <{ UserNode user=@user }>
+<{ :if }>
+
+# Directive.
+<{ UserNode user=@user if: @user.happy? }>
+```
+
+### Loops
+
+```ruby
+# Block.
+<{ for: user in: @users }>
+  <{ UserNode user=user }>
+<{ :for }>
+
+# Directive.
+<{ UserNode user=user for: user in: @users }>
+```
