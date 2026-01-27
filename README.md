@@ -6,18 +6,40 @@ LowNodes are the flexible building blocks of your application. They can respond 
 
 ## RBX [UNRELEASED]
 
-Instead of `.rb` use `.rbx` as your file extension. In the special `render()` method place HTML:
+Use `.rbx` as your file extension and now you can place HTML inside of `render()`:
 
 ```ruby
 def render
-  <html></html>
+  <html>Content</html>
 end
 ```
 
-## Antlers [UNRELEASED]
+Antlers expressions are also now accepted:
 
 ```ruby
 def render
   <html><{ ChildNode }></html>
+end
+```
+
+## Antlers
+
+### Props
+
+```ruby
+def render
+  <html><{ UserNode user=@user }></html>
+end
+```
+
+### Slots
+
+```ruby
+def render
+  <html>
+    <{ LayoutNode: username=@user.username }>
+      <{ UserNode user=@user }>
+    <{ :LayoutNode }>
+  </html>
 end
 ```
