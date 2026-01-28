@@ -37,8 +37,8 @@ end
 ```ruby
 def render
   <html>
-    <{ LayoutNode: username=@user.username }>
-      <{ UserNode user=@user }>
+    <{ LayoutNode: username = @user.username }>
+      <{ UserNode user = @user }>
     <{ :LayoutNode }>
   </html>
 end
@@ -49,11 +49,11 @@ end
 ```ruby
 # Block.
 <{ if: @user.happy? }>
-  <{ UserNode user=@user }>
+  <{ UserNode user = @user }>
 <{ :if }>
 
 # Directive.
-<{ UserNode user=@user if: @user.happy? }>
+<{ UserNode user = @user if: @user.happy? }>
 ```
 
 ### Loops
@@ -61,9 +61,9 @@ end
 ```ruby
 # Block.
 <{ for: user in: @users }>
-  <{ UserNode user=user }>
+  <{ UserNode user = user }>
 <{ :for }>
 
 # Directive.
-<{ UserNode user=user for: user in: @users }>
+<{ UserNode user = user for: user in: @users }>
 ```
