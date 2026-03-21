@@ -60,7 +60,7 @@ end
 
 ```ruby
 # Block.
-<{ for: user in: @users }>
+<{ for: user in: @users parallel: true }>
   <{ UserNode user = user }>
 <{ :for }>
 
