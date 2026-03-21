@@ -8,6 +8,7 @@ require 'low_loop' # TODO: Merge low loop's response factory into low event.
 class LowNode
   extend Observers
   include LowType
+  include Low::Types
 
   attr_reader :event
 
