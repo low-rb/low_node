@@ -2,8 +2,7 @@
 
 require 'pry'
 require 'pry-nav'
-
-require_relative '../../lib/low_node'
+require 'lowload'
 
 RSpec.configure do |config|
   # Enable flags like --only-failures and --next-failure
