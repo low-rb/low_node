@@ -6,12 +6,13 @@ source 'https://rubygems.org'
 gemspec
 
 group :development do
-  gem 'antlers', path: '../antlers'
-  gem 'observers', path: '../observers'
-
   gem 'low_event', path: '../low_event'
   gem 'low_loop', path: '../low_loop'
   gem 'low_type', path: '../lowtype'
+  gem 'lowload', path: '../lowload'
+
+  gem 'antlers', path: '../antlers'
+  gem 'observers', path: '../observers'
 
   gem 'pry'
   gem 'pry-nav'

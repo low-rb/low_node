@@ -1,7 +1,7 @@
 PATH
   remote: ../antlers
   specs:
-    antlers (0.0.0)
+    antlers (0.1.0)
       low_type (~> 1.0)
 
 PATH
@@ -23,6 +23,12 @@ PATH
       low_type (~> 1.0)
       protocol-http
       protocol-url
+
+PATH
+  remote: ../lowload
+  specs:
+    lowload (0.3.0)
+      lowkey
 
 PATH
   remote: ../lowtype
@@ -161,6 +167,7 @@ DEPENDENCIES
   low_loop!
   low_node!
   low_type!
+  lowload!
   observers!
   pry
   pry-nav
