@@ -4,7 +4,7 @@
 
 LowNodes are the flexible building blocks of your application. They can respond to a route request, or they can be called by another node. They can render a return value, or they can create an event. They are designed to be specific enough to observe events and return values, but generic enough to be split up to represent a complex application with its own patterns and structure. Nodes can render HTML/JSON directly from the Ruby class (via RBX, similar to JSX) and render other nodes into the output using Raindeer's special Antlers syntax; `<html><{ ChildNode }></html>`.
 
-## RBX [UNRELEASED]
+## RBX
 
 Use `.rbx` as your file extension and now you can place HTML inside of `render()`:
 
@@ -14,15 +14,32 @@ def render
 end
 ```
 
-Antlers expressions are also now accepted:
+## Antlers
+
+ℹ️ For the full syntax guide see [Antlers](https://github.com/raindeer-rb/antlers).
+
+### Variables
+
+```ruby
+def render
+  <html>{@variable}</html>
+end
+```
+
+Variables `{}` are also useful when embedding HTML text in Ruby without syntax highlighting issues:
+```ruby
+def render
+  <html>{"I'm a complicated sentence\n"}</html>
+end
+```
+
+### Nodes
 
 ```ruby
 def render
   <html><{ ChildNode }></html>
 end
 ```
-
-## Antlers
 
 ### Props
 
@@ -37,8 +54,8 @@ end
 ```ruby
 def render
   <html>
-    <{ LayoutNode: username = @user.username }>
-      <{ UserNode user = @user }>
+    <{ LayoutNode: username=@user.username }>
+      <{ UserNode user=@user }>
     <{ :LayoutNode }>
   </html>
 end
@@ -49,11 +66,11 @@ end
 ```ruby
 # Block.
 <{ if: @user.happy? }>
-  <{ UserNode user = @user }>
+  <{ UserNode user=@user }>
 <{ :if }>
 
 # Directive.
-<{ UserNode user = @user if: @user.happy? }>
+<{ UserNode user=@user if: @user.happy? }>
 ```
 
 ### Loops
@@ -61,9 +78,9 @@ end
 ```ruby
 # Block.
 <{ for: user in: @users parallel: true }>
-  <{ UserNode user = user }>
+  <{ UserNode user }> # Shorthand for `user=user`.
 <{ :for }>
 
 # Directive.
-<{ UserNode user = user for: user in: @users }>
+<{ UserNode user=user for: user in: @users }>
 ```
