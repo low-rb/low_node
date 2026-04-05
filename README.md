@@ -9,78 +9,40 @@ LowNodes are the flexible building blocks of your application. They can respond 
 Use `.rbx` as your file extension and now you can place HTML inside of `render()`:
 
 ```ruby
-def render
-  <html>Content</html>
+class MyClass
+  def render
+    <p>Hello</p>
+  end
 end
 ```
 
 ## Antlers
 
+Antlers syntax can be embedded inside the `render` method of your RBX file:
+```ruby
+class MyClass
+  def render
+    <p><{ ChildNode }></p>
+  end
+end
+```
+
 ℹ️ For the full syntax guide see [Antlers](https://github.com/raindeer-rb/antlers).
 
-### Variables
+## Parallelism and Immutability
+
+Antlers and LowNode works together to convert props to immutable copies and run enabled sections of code in parallel.
 
 ```ruby
 def render
-  <html>{@variable}</html>
+  <{ parallelize: }>
+    # For Loop executed at the same time as UserNode.
+    <{ for: user in: @users }>
+      <{ UserNode user=user }>
+    <{ :for }>
+
+    # PostsNode executed at the same time as For Loop.
+    <{ PostsNode }>
+  <{ :parallelize }>
 end
-```
-
-Variables `{}` are also useful when embedding HTML text in Ruby without syntax highlighting issues:
-```ruby
-def render
-  <html>{"I'm a complicated sentence\n"}</html>
-end
-```
-
-### Nodes
-
-```ruby
-def render
-  <html><{ ChildNode }></html>
-end
-```
-
-### Props
-
-```ruby
-def render
-  <html><{ UserNode user=@user }></html>
-end
-```
-
-### Slots
-
-```ruby
-def render
-  <html>
-    <{ LayoutNode: username=@user.username }>
-      <{ UserNode user=@user }>
-    <{ :LayoutNode }>
-  </html>
-end
-```
-
-### Conditionals
-
-```ruby
-# Block.
-<{ if: @user.happy? }>
-  <{ UserNode user=@user }>
-<{ :if }>
-
-# Directive.
-<{ UserNode user=@user if: @user.happy? }>
-```
-
-### Loops
-
-```ruby
-# Block.
-<{ for: user in: @users parallel: true }>
-  <{ UserNode user }> # Shorthand for `user=user`.
-<{ :for }>
-
-# Directive.
-<{ UserNode user=user for: user in: @users }>
 ```
