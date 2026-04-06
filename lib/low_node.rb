@@ -5,10 +5,14 @@ require 'low_type'
 require 'low_event'
 require 'low_loop' # TODO: Merge low loop's response factory into low event.
 
+require_relative 'templates/renderer'
+
 class LowNode
   extend Observers
+
   include LowType
   include Low::Types
+  include Low::Templates::Renderer
 
   attr_reader :event
 
@@ -27,12 +31,6 @@ class LowNode
   class << self
     def handle(event:)
       self.new(event:).handle(event:)
-    end
-
-    def render(event:)
-      node = self.new(event:)
-      response = Low::Factories::ResponseFactory.html(body: node.render(event:))
-      Low::Events::ResponseEvent.new(response:)
     end
 
     def inherited(child)
