@@ -24,10 +24,6 @@ class LowNode
     raise NotImplementedError
   end
 
-  def render(event:)
-    raise NotImplementedError
-  end
-
   class << self
     def handle(event:)
       self.new(event:).handle(event:)

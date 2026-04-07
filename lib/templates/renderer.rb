@@ -5,10 +5,21 @@ require_relative 'template'
 module Low
   module Templates
     module Renderer
-      # When `render()` contains RBX/Antlers then LowLoad populates a Template which we use to render instead.
-      def render_template(event:)
+      def render(event:)
+        raise NotImplementedError
+      end
+
+      # When render() contains RBX/Antlers then LowLoad populates a template to render with instead.
+      def render_template(event:, parent_binding: binding, props: {})
         template = self.class.template
-        template.parser.render(template.ast, caller_binding: binding, namespace: template.namespace)
+        current_binding = binding
+      
+        # Pass in props from parent component as keyword arguments.
+        template.params.each do |param|
+          current_binding.local_variable_set(param, props[param]) if props[param]
+        end
+
+        template.engine.render(ast: template.ast, current_binding:, parent_binding:, namespace: template.namespace)
       end
 
       def self.included(base)
@@ -20,19 +31,24 @@ module Low
           @template
         end
 
-        def add_template(parser:, ast:, template:, namespace:)
-          @template = Template.new(parser:, ast:, template:, namespace:)
+        def load_template(template:, params:, engine:, namespace:)
+          @template = Template.new(template:, params:, engine:, namespace:)
         end
 
+        # TODO: Handle situation where node is tested in a unit test and args come in here; expose them to the template.
         def render(event:)
           node = self.new(event:)
 
-          # Valid Ruby is rendered as written while RBX/Antlers is rendered via template.
+          # RBX/Antlers is rendered via template while valid Ruby is rendered as written.
           body = @template ? node.render_template(event:) : node.render(event:)
 
           # GOAL: Make return value configurable; ResponseEvent, Response, or body.
           response = Low::Factories::ResponseFactory.html(body:)
           Low::Events::ResponseEvent.new(response:)
+        end
+
+        def render_template(event:, parent_binding: nil)
+          self.new(event:).render_template(event:, parent_binding:)
         end
       end
     end

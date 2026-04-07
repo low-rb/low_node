@@ -3,13 +3,15 @@
 module Low
   module Templates
     class Template
-      attr_reader :parser, :ast, :template, :namespace
+      attr_reader :template, :params, :namespace, :engine, :ast
 
-      def initialize(parser:, ast:, template:, namespace:)
-        @parser = parser
-        @ast = ast
-        @template = template # Not currently used, AST provides all.
+      def initialize(template:, params:, namespace:, engine:)
+        @template = template
+        @params = params
         @namespace = namespace
+
+        @engine = engine
+        @ast = engine.parse(template)
       end
     end
   end
