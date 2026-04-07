@@ -2,7 +2,8 @@ PATH
   remote: ../antlers
   specs:
     antlers (0.1.0)
-      low_type (~> 1.0)
+      erb
+      low_event
 
 PATH
   remote: ../low_event
@@ -33,7 +34,7 @@ PATH
 PATH
   remote: ../lowtype
   specs:
-    low_type (1.1.12)
+    low_type (1.1.13)
       expressions (~> 0.1)
       lowkey (~> 0.4)
 
@@ -82,6 +83,7 @@ GEM
       fiber-local (~> 1.1)
       json
     diff-lcs (1.6.2)
+    erb (6.0.2)
     expressions (0.1.0)
     fiber-annotation (0.2.0)
     fiber-local (1.1.0)
