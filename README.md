@@ -24,7 +24,7 @@ Antlers syntax can be embedded within RBX:
 ```ruby
 class ParentNode < LowNode
   def render
-    <p><{ ChildNode }></p>
+    <html><{ ChildNode }></html>
   end
 end
 
@@ -37,7 +37,7 @@ end
 
 Which outputs:
 ```HTML
-<p><strong>Hello</strong></p>
+<html><strong>Hello</strong></html>
 ```
 
 ℹ️ For the full syntax guide see [Antlers](https://github.com/raindeer-rb/antlers).

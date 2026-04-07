@@ -5,7 +5,7 @@ require_relative 'template'
 module Low
   module Templates
     module Renderer
-      # When `render()` contains RBX/Antlers then LowLoad converts it into a template which we render via instead.
+      # When `render()` contains RBX/Antlers then LowLoad populates a Template which we use to render instead.
       def render_template(event:)
         template = self.class.template
         template.parser.render(template.ast, caller_binding: binding, namespace: template.namespace)
