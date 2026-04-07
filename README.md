@@ -2,14 +2,16 @@
 
 # LowNode
 
-LowNodes are the flexible building blocks of your application. They can respond to a route request, or they can be called by another node. They can render a return value, or they can create an event. They are designed to be specific enough to observe events and return values, but generic enough to be split up to represent a complex application with its own patterns and structure. Nodes can render HTML/JSON directly from the Ruby class (via RBX, similar to JSX) and render other nodes into the output using Raindeer's special Antlers syntax; `<html><{ ChildNode }></html>`.
+Low Nodes are the flexible building blocks of your application. They can respond to a route request, or they can be called by another node. They can render a return value, or they can create an event. They are designed to be specific enough to observe events and return values, but generic enough to be split up to represent a complex application with its own patterns and structure.
+
+Nodes can render HTML/JSON directly from the Ruby class (via RBX, similar to JSX) and render other nodes into the output using [Antlers](https://github.com/raindeer-rb/antlers) syntax; `<html><{ ChildNode }></html>`.
 
 ## RBX
 
 Use `.rbx` as your file extension and now you can place HTML inside of `render()`:
 
 ```ruby
-class MyClass
+class MyNode < LowNode
   def render
     <p>Hello</p>
   end
@@ -18,20 +20,31 @@ end
 
 ## Antlers
 
-Antlers syntax can be embedded inside the `render` method of your RBX file:
+Antlers syntax can be embedded within RBX:
 ```ruby
-class MyClass
+class ParentNode < LowNode
   def render
     <p><{ ChildNode }></p>
   end
 end
+
+class ChildNode < LowNode
+  def render
+    <strong>Hello</strong>
+  end
+end
+```
+
+Which outputs:
+```HTML
+<p><strong>Hello</strong></p>
 ```
 
 ℹ️ For the full syntax guide see [Antlers](https://github.com/raindeer-rb/antlers).
 
-## Parallelism and Immutability
+### Parallelism and Immutability
 
-Antlers and LowNode works together to convert props to immutable copies and run enabled sections of code in parallel.
+LowNode converts props to immutable copies, allowing you to run sections of code in parallel:
 
 ```ruby
 def render
@@ -44,5 +57,22 @@ def render
     # PostsNode executed at the same time as For Loop.
     <{ PostsNode }>
   <{ :parallelize }>
+end
+```
+
+## HTML
+
+Use `.rb` as your file extension to render using string interpolation:
+```ruby
+class MyNode < LowNode
+  def initialize
+    @greeting = 'Hello'
+  end
+
+  def render
+    <<~HTML
+      <p>#{@greeting}</p>
+    HTML
+  end
 end
 ```
