@@ -1,6 +1,6 @@
 require_relative '../../lib/low_node'
 
-class AntlersNode < LowNode
+class ParentNode < LowNode
   def render
     <html><{ ChildNode }></html>
   end
