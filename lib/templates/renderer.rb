@@ -10,7 +10,7 @@ module Low
       end
 
       # When render() contains RBX/Antlers then LowLoad populates a template to render with instead.
-      def render_template(event:, parent_binding: binding, props: {})
+      def render_template(event:, parent_binding: nil, slot_node: nil, props: {})
         template = self.class.template
         current_binding = binding
         
@@ -19,7 +19,7 @@ module Low
           current_binding.local_variable_set(param, props[param]) if props[param]
         end
 
-        template.engine.render(ast: template.ast, current_binding:, parent_binding:, namespace: template.namespace)
+        template.engine.render(ast: template.ast, current_binding:, parent_binding:, slot_node:, namespace: template.namespace)
       end
 
       def self.included(base)
@@ -47,8 +47,8 @@ module Low
           Low::Events::ResponseEvent.new(response:)
         end
 
-        def render_template(event:, parent_binding: nil)
-          self.new(event:).render_template(event:, parent_binding:)
+        def render_template(event:)
+          self.new(event:).render_template(event:)
         end
       end
     end
