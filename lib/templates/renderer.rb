@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+require 'ostruct'
 require_relative 'template'
 
 module Low
@@ -11,14 +12,12 @@ module Low
 
       # When render() contains RBX/Antlers then LowLoad populates a template to render with instead.
       def render_template(event:, parent_binding: binding, props: {})
-        template = self.class.template
         current_binding = binding
-      
-        # Pass in props from parent component as keyword arguments.
-        template.params.each do |param|
-          current_binding.local_variable_set(param, props[param]) if props[param]
-        end
-
+        
+        # Pass in props from parent component.
+        current_binding.local_variable_set(:props, OpenStruct.new(props)) unless props.empty?
+        
+        template = self.class.template
         template.engine.render(ast: template.ast, current_binding:, parent_binding:, namespace: template.namespace)
       end
 
