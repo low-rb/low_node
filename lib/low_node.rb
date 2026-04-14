@@ -21,7 +21,7 @@ class LowNode
   end
 
   def handle(event:)
-    raise NotImplementedError
+    nil
   end
 
   class << self

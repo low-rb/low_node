@@ -6,7 +6,7 @@ module Low
   module Templates
     module Renderer
       def render(event:)
-        raise NotImplementedError
+        nil
       end
 
       # When render() contains RBX/Antlers then LowLoad populates a template to render with instead.
