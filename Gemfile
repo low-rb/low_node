@@ -15,8 +15,7 @@ group :development do
   gem 'antlers', path: '../antlers'
   gem 'observers', path: '../observers'
 
-  gem 'pry'
-  gem 'pry-nav'
+  gem 'irb'
   gem 'rack'
   gem 'rack-test'
   gem 'rake', '~> 13.0'
