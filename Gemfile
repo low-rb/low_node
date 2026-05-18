@@ -8,7 +8,7 @@ gemspec
 group :development do
   gem 'low_event', path: '../low_event'
   gem 'low_loop', path: '../low_loop'
-  gem 'low_type', path: '../lowtype'
+  gem 'low_type', path: '../low_type'
   gem 'lowkey', path: '../lowkey'
   gem 'lowload', path: '../lowload'
 
