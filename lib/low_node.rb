@@ -11,6 +11,7 @@ class LowNode
   extend Observers
 
   include LowType
+  include Low::Events
   include Low::Types
   include Low::Templates::Renderer
 
