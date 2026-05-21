@@ -5,7 +5,7 @@ require_relative 'template'
 module Low
   module Templates
     module Renderer
-      def render(event:)
+      def render(event: nil)
         nil
       end
 
@@ -36,7 +36,7 @@ module Low
         end
 
         # TODO: Handle situation where node is tested in a unit test and args come in here; expose them to the template.
-        def render(event:)
+        def render(event: nil)
           node = self.new(event:)
 
           # RBX/Antlers is rendered via template while valid Ruby is rendered as written.
