@@ -9,7 +9,7 @@ module Low
         nil
       end
 
-      # When render() contains RBX/Antlers then LowLoad populates a template to render with instead.
+      # When render() contains RBX/Antlers then LowLoad builds a template to render with instead.
       def render_template(event:, parent_binding: nil, slot_node: nil, props: {})
         template = self.class.template
 
@@ -33,7 +33,7 @@ module Low
           @template
         end
 
-        def load_template(template:, params:, engine:, namespace:)
+        def build_template(template:, params:, engine:, namespace:)
           @template = Template.new(template:, params:, engine:, namespace:)
         end
 
@@ -41,7 +41,7 @@ module Low
         def render(event: nil)
           node = self.new(event:)
 
-          # RBX/Antlers is rendered via template while valid Ruby is rendered as written.
+          # RBX/Antlers is rendered via template.
           body = @template ? node.render_template(event:) : node.render(event:)
 
           # GOAL: Make return value configurable; ResponseEvent, Response, or body.
