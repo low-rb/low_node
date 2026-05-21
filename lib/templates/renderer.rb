@@ -12,8 +12,10 @@ module Low
       # When render() contains RBX/Antlers then LowLoad populates a template to render with instead.
       def render_template(event:, parent_binding: nil, slot_node: nil, props: {})
         template = self.class.template
+
         current_binding = binding
-        
+        current_binding.local_variable_set(:event, event)
+
         # Pass in props from parent component as keyword arguments.
         template.params.each do |param|
           current_binding.local_variable_set(param, props[param]) if props[param]
