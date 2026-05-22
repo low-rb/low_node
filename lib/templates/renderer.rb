@@ -41,16 +41,22 @@ module Low
         def render(event: nil)
           node = self.new(event:)
 
-          # RBX/Antlers is rendered via template.
-          body = @template ? node.render_template(event:) : node.render(event:)
-
           # GOAL: Make return value configurable; ResponseEvent, Response, or body.
-          response = Low::Factories::ResponseFactory.html(body:)
+          response = Low::Factories::ResponseFactory.html(body: body(node:, event:))
           Low::Events::ResponseEvent.new(response:)
         end
 
         def render_template(event:)
           self.new(event:).render_template(event:)
+        end
+
+        private
+
+        def body(node:, event:)
+          return node.render_template(event:) if @template
+          return node.render(event:) if node.method(:render).arity > 0
+
+          node.render
         end
       end
     end
