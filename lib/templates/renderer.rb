@@ -13,6 +13,8 @@ module Low
       def render_template(event:, parent_binding: nil, slot_node: nil, props: {})
         template = self.class.template
 
+        # NOTE: We currently set local variables on this local binding, not the receiver's binding.
+        # TODO: Should we create an "instance_binding" method on LowNode and use that binding instead?
         current_binding = binding
         current_binding.local_variable_set(:event, event)
 
