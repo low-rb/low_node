@@ -48,10 +48,6 @@ module Low
           Low::Events::ResponseEvent.new(response:)
         end
 
-        def render_template(event:)
-          self.new(event:).render_template(event:)
-        end
-
         private
 
         def response_body(node:, event:)
