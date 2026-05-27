@@ -54,7 +54,7 @@ PATH
 PATH
   remote: .
   specs:
-    low_node (0.2.2)
+    low_node (0.3.0)
       antlers
       low_event
       low_loop
