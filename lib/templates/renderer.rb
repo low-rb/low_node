@@ -44,7 +44,7 @@ module Low
           node = self.new(event:)
 
           # GOAL: Make return value configurable; ResponseEvent, Response, or body.
-          response = Low::Factories::ResponseFactory.html(body: body(node:, event:))
+          response = Low::Factories::ResponseFactory.html(body: response_body(node:, event:))
           Low::Events::ResponseEvent.new(response:)
         end
 
@@ -54,7 +54,7 @@ module Low
 
         private
 
-        def body(node:, event:)
+        def response_body(node:, event:)
           return node.render_template(event:) if @template
           return node.render(event:) if node.method(:render).arity > 0
 
