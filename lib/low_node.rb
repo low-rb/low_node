@@ -32,6 +32,15 @@ class LowNode
 
     def inherited(child)
       child.include LowType
+      increase_count
+    end
+
+    def count
+      @count ||= 0
+    end
+
+    def increase_count
+      @count = count + 1
     end
   end
 end
