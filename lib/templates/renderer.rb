@@ -45,7 +45,7 @@ module Low
 
           # GOAL: Make return value configurable; ResponseEvent, Response, or body.
           response = Low::Factories::ResponseFactory.html(body: response_body(node:, event:))
-          Low::Events::ResponseEvent.new(response:)
+          Low::Events::ResponseEvent.new(response:).tap { it.branch }
         end
 
         private
