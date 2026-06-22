@@ -21,6 +21,7 @@ class LowNode
     @event = event
   end
 
+  # TODO: Rename "handle" method/action to more specific "route" and maybe split out into module too.
   def handle(event:)
     nil
   end
