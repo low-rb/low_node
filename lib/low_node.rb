@@ -28,7 +28,7 @@ class LowNode
 
   class << self
     def handle(event:)
-      self.new(event:).handle(event:)
+      new(event:).handle(event:)
     end
 
     def inherited(child)

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require_relative '../low_node'
 
 class UserNode < LowNode

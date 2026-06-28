@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require_relative '../low_node'
 
 class UserNode < LowNode
@@ -11,7 +13,7 @@ class UserNode < LowNode
     {
       name: @user.name,
       rsvp: @user.rsvp,
-      diet: @user.diet,
+      diet: @user.diet
     }
   end
 end
