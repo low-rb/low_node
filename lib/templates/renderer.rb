@@ -27,10 +27,11 @@ module Low
       end
 
       module ClassMethods
+        # Accepts all arguments but only sends arguments required by the sub class.
         def render(**)
           # GOAL: Make return value configurable; ResponseEvent, Response, or body.
           response = Low::Factories::ResponseFactory.html(body: response_body(**))
-          Low::Events::ResponseEvent.new(response:).tap { it.branch }
+          Low::Events::ResponseEvent.new(response:).tap(&:branch)
         end
 
         # LowLoad hook.
@@ -45,12 +46,13 @@ module Low
 
         private
 
-        def response_body(**)
-          node = new(**)
+        def response_body(**kwargs)
+          node = new(**kwargs)
 
-          return node.render_template(**) if @template
+          return node.render_template(**kwargs) if @template
+          return node.render(**kwargs) if node.method(:render).arity > 0
 
-          node.render(**)
+          node.render
         end
       end
     end
