@@ -1,9 +1,9 @@
 require_relative '../../lib/low_node'
 
-module RBX
-  class ChildNode < LowNode
+module Ruby
+  class Node < LowNode
     def render
-      <p>{"I'm a child"}</p>
+      'node'
     end
   end
 end

@@ -17,7 +17,7 @@ class LowNode
 
   attr_reader :event
 
-  def initialize(event:)
+  def initialize(event: nil)
     @event = event
   end
 

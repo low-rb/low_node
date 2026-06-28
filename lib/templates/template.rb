@@ -11,7 +11,7 @@ module Low
         @namespace = namespace
 
         @engine = engine
-        @ast = engine.ast(template)
+        @ast = engine.ast(template:, namespace:)
       end
     end
   end
